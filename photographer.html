@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+    <title>Fisheye - photographe </title>
+  </head>
+  <body>
+    <header>
+      <img src="assets/images/logo.png" class="logo" />
+    </header>
+    <main id="main" aria-modal="false">
+      <div class="photograph-header">
+        <button class="contact_button" onclick="displayModal()" aria-label="contactez-moi">Contactez-moi</button>
+      </div>
+    </main>
+    <div id="contact_modal">
+			<div class="modal" aria-modal="true" role="dialog" aria-describedby="coordonees" aria-labelledby="modal message">
+				<header>
+          <h2>Contactez-moi</h2>
+          <img src="assets/icons/close.svg" alt="close modal" onclick="closeModal()" aria-describedby="fermer"/>
+        </header>
+				<form id="contact-form">
+					<div>
+						<label for="prenom">Prénom</label>
+            <input type="text" id="prenom" name="prenom" placeholder="Saisissez votre prénom" aria-labelledby="prénom" />
+            <span class="error-message" id="prenom-error"aria-labelledby="prenom invalide"></span>
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" name="nom" placeholder="Saisissez votre nom" aria-labelledby="nom" />
+            <span class="error-message" id="nom-error"aria-labelledby="nom invalide"></span>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Saisissez votre email"aria-labelledby="email"  />
+            <span class="error-message" id="email-error"aria-labelledby="email invalide"></span>
+            <label for="message">Votre message</label>
+						<input type="text" id="message" name="message" placeholder="Saisissez votre message" aria-labelledby="message" />
+            <span class="error-message" id="message-error" aria-labelledby="message invalide"></span>
+					</div>
+          <button class="contact_button" type="submit" aria-label="envoyer le formulaire">Envoyer</button>
+				</form>
+			</div>
+		</div>
+    <script src="/scripts/pages/photographer.js"></script>
+    <script src="/scripts/utils/contactForm.js"></script>
+  </body>
+</html>
