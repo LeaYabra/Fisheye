@@ -9,7 +9,9 @@ function photographerFactory(data) {
         const img = document.createElement( 'img' );
         const link = document.createElement( 'a' );
         link.setAttribute("href",a);
+        link.setAttribute("aria-label",'aller sur la page de '+ name+', '+city+ ', '+ tagline+', '+price+'€ par jour')
         img.setAttribute("src", picture);
+        img.setAttribute("alt",name);
         const h2 = document.createElement( 'h2' );
         const h3 = document.createElement('h3');
         const h4 = document.createElement('h4');
