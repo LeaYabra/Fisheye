@@ -1,27 +1,29 @@
-/*const urlParams = new URLSearchParams(window.location.search);
-const id= urlParams.get('id');
-console.log(id);
-
-getPhotographers().then(photographers => {
-  const myPhotographer = photographers.filter(function(photographer) {
-    return photographer.id == id;
-   
-  });
-  console.log(myPhotographer);
-});*/
-
+let medias = [];
 //recupere id et affiche les info du photographe
 async function init() {
   const urlParams = new URLSearchParams(window.location.search);
-  const id = urlParams.get('id');
-  const photographers = await getPhotographers();
+  const id = urlParams.get("id");
+  const data = await getData();
+  const photographers = data.photographers;
   console.log(photographers);
-  const myPhotographer = photographers.find(function(photographer) {
+  const myPhotographer = photographers.find(function (photographer) {
     return photographer.id == id;
   });
-  console.log(myPhotographer)
+  console.log(myPhotographer);
   displayPhotographer(myPhotographer);
- 
+  const myMedia = data.media.filter(function (media) {
+    return media.photographerId == id;
+  });
+  medias = myMedia;
+  console.log(myMedia);
+  displayMedia(myMedia);
+
+//ajout du prix par jour
+const footer = document.querySelector(".price");
+footer.innerHTML = `${myPhotographer.price} €/jour`;
+// ajout du nom de photographe dans modal contact
+const header = document.getElementById("modalTitle");
+header.innerHTML = `Contactez-moi <br>${myPhotographer.name}`;
 }
 init();
 
@@ -32,35 +34,32 @@ async function displayPhotographer(photographer) {
   const userCardDOM = photographerModel.getUserInfoDOM();
   photographerSection.appendChild(userCardDOM);
 }
-
-async function media() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const id = urlParams.get('id');
-  const media = await getMedia();
-  console.log(media);
-  const myMedia = media.filter(function(media) {
-    return media.photographerId == id;
-  });
-  console.log(myMedia)
-  displayMedia(myMedia);
+function modalAddEventListener() {
+ let mediasDisplayLink = document.querySelectorAll(".mediaDisplayLink");
+  mediasDisplayLink.forEach((mediaDisplayLink) => {
+    mediaDisplayLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      console.log("test", e.srcElement);
+      // est ce une image ou video
+      let type = "video";
+      let title = e.srcElement.getAttribute("aria-label");
+      if (e.srcElement.tagName === "IMG") {
+        type = "picture";
+        title = e.srcElement.getAttribute("alt");
+      }
+      // je recupère le titre
+      // je recupere la source
+      openModal(title, { type, src: e.srcElement.getAttribute("src") });
+    });
+});
 }
-
-media();
-
-/* affiche les media
-async function displayMedia(media) {
-  const mediaSection = document.querySelector(".photograph-media");
-  const mediaModel = media(media);
-  const userCardDOM = mediaModel.getUserInfoDOM();
-  mediaSection.appendChild(userCardDOM);
-}*/
 
 async function displayMedia(medias) {
   const mediaSection = document.querySelector(".photographer-media");
   medias.forEach((media) => {
-      const mediaModel = mediaPhotographer(media);
-      const mediaCardDOM = mediaModel.getMediaCardDOM();
-      mediaSection.appendChild(mediaCardDOM);
+    const mediaModel = mediaPhotographer(media);
+    const mediaCardDOM = mediaModel.getMediaCardDOM();
+    mediaSection.appendChild(mediaCardDOM);
   });
-
+  modalAddEventListener();
 }

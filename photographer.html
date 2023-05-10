@@ -18,7 +18,7 @@
         <button class="contact_button" onclick="displayModal()" aria-label="contactez-moi" aria-haspopup="dialog" aria-controls="dialog">Contactez-moi</button>
       </div>
       <div class="photographer-media">
-          </div>
+       </div>
     </main>
     <div id="contact_modal">
 			<div class="modal" aria-modal="true" role="dialog" aria-describedby="coordonees" aria-labelledby="modal message">
@@ -50,13 +50,20 @@
 				<header>
           <img src="assets/icons/closeMedia.svg" alt="closeModal" class="closeModal" onclick="closeModalGallery()" aria-describedby="fermer"/>
         </header>
-        <div class="lightbox-prev">&#10094;</div>
-        <div class="lightbox-next">&#10095;</div>
+        <div class="lightbox-prev" aria-label="suivant">&#10094;</div>
+        <div class="lightbox-next" aria-label="precedent">&#10095;</div>
 			</div>
 		</div>
+    <div class="likeTarif">
+      <p class="totalLike" aria-label="total de likes"></p>
+      <img src="assets/icons/heartBlack.svg" alt="heart" class="heartTotal" aria-describedby="liker"/>
+      <p class="price" aria-label="tarif journalier"></p>
+    </div>
+    
     <script src="/scripts/utils/functions.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
     <script src="/scripts/pages/photographer.js"></script>
     <script src="/scripts/factories/photographerInfo.js"></script>
+    <script src="/scripts/factories/photographer.js"></script>
   </body>
 </html>

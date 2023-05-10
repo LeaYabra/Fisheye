@@ -1,3 +1,4 @@
+
 const openModalButton = document.getElementById('contact_button');
 const modal = document.querySelector('.modal');
 const modalContent = modal.querySelector('.contact_modal');
@@ -6,6 +7,7 @@ const modalCloseButton = modal.querySelector('.contact_button');
 function displayModal() {
   const modal = document.getElementById("contact_modal");
 	modal.style.display = "block";
+  
   document.getElementById("prenom").focus();
 }
 
@@ -18,6 +20,15 @@ function closeModalGallery() {
   const modal = document.getElementById("media_modal");
   modal.style.display = "none";
 }
+//Fermer la modale avec le clavier
+function closeModalOnEscape(event) {
+  if (event.key === 'Escape' || event.keyCode === 27) {
+    closeModalGallery();
+    closeModal();
+  }
+}
+document.addEventListener('keydown', closeModalOnEscape);
+
 // Fermer la modale quand on clique en dehors
 window.onclick = function(event) {
   if (event.target == document.getElementById("contact_modal")) {
@@ -86,4 +97,4 @@ submitBtn.onclick = function(event)  {
   };
 
 
-
+  

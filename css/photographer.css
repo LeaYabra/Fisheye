@@ -1,8 +1,3 @@
-.photograph-header {
-    background-color: #FAFAFA;
-    height: 300px;
-    margin: 0 100px;
-}
 #contact_modal{
     display: none;
     position:fixed;
@@ -40,7 +35,7 @@
 .modal header h2 {
     font-size: 50px;
     font-weight: normal;
-    text-align: center;
+   margin-top: 8%;
 }
 
 form {
@@ -48,6 +43,7 @@ form {
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
+    padding-top: 5%;
 }
 
 form label {
@@ -92,19 +88,24 @@ button{
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+ 
 }
 .contact_button {
     position: absolute;
-    margin-left: 34%;
-    margin-top: 10%;
+    margin-left: 430px;
+    margin-top: 120px;
+    align-items: center;
+    display: flex;
 }
 .photograph-header {
    display: block;
-   width: 90%;
+    width: 90%;
+    background-color: #FAFAFA;
+    height: 300px;
+    margin: 0 70px;
 }
-
 .photograph-header article aria {
-display: none;
+    display: none;
 }
 .photograph-header article {
     justify-self: center;
@@ -136,7 +137,7 @@ display: none;
     color: #901C1C;
     font-weight: 400;
     font-size: 20px;
-   line-height: 1em;
+    line-height: 1em;
 }
 .photograph-header  div h4 {
     font-weight: 400;
@@ -154,11 +155,10 @@ display: none;
 .photographer-media {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 50px;
+    gap: 30px;
     margin-top: 100px;
-    padding-left:5% ;
-    padding-right: 5%;
-    width: 100%;
+    margin-left:   5%;
+    width: auto;
 }
     
 .photographer-media article {
@@ -167,7 +167,8 @@ display: none;
     justify-content: center;
     flex-direction: column;
     justify-content: space-between;
-    padding-top: 5%;  
+    padding-top: 5%;
+    padding-right: 10%;
 }
 .photographer-media article video,img{
     width: 100%;
@@ -177,39 +178,39 @@ display: none;
 }
 .photographer-media article img{
     width: 300px;
+    
 }
-
 .photographer-media div {
     display: flex;
-    flex-wrap: wrap;
-  }
-  
+    margin-top: 5%;
+}
 .photographer-media  div  h3 {
-    color: #901C1C;
-    font-weight: 500;
-    font-size: 25px;
-    flex-basis: 80%;
-    word-wrap: break-word;
+    width: 80%;
+    margin: 0%;
+    padding: 0%;
 }
-.photographer-media div  h4 {
-    float: right;
-    color: #901C1C;
-    font-weight: 500;
-    font-size: 25px;
- 
-}
-.photographer-media  div h3, h4 {
+.photographer-media  div h3, span h4 {
     display: inline-block;
     margin: 0;
     padding: 0;
     justify-content: space-between;
+    font-weight: 500;
+    font-size: 20px;
+    color: #901C1C;
 }
-h4 i {
-    display: inline-block;
-    margin-right: 5px;
-    font-size: 16px;
-  }
-/* Gallery styles */
+.photographer-media span {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+}
+.photographer-media span img {
+  padding-left: 10%;
+  width: 30px;
+  height: 30px;
+  
+}
+
 #media_modal {
     display: none;
     position: fixed;
@@ -217,7 +218,7 @@ h4 i {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 999;
+    z-index: 1000;
 }
 #galleryModal {
     border-radius: 5px;
@@ -238,34 +239,19 @@ h4 i {
     cursor: pointer;
     height: 42px;
     width: 42px;
-    padding-left: 90%;
+    padding-left: 94%;
+    padding-top: 7%;
 }
-
-
-/*.gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-  }
-  
-  .gallery img {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
+.lightbox img,
+.lightbox video{
+    width: 80%;
+    height: 80%;
+    object-fit:cover;
     cursor: pointer;
-  }*/
-
-.lightbox img{
-    width: 75%;
-    height: 50%;
-    object-fit: cover;
-    cursor: pointer;
-    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
+    position: absolute;
 }
 .lightbox p {
     color: #901C1C;
@@ -274,11 +260,10 @@ h4 i {
     transform: translate(-50%, -50%);
     position: absolute;
     width: 75%;
-    height: 50%;
+    height: 20%;
     position: absolute;
-    top: 100%;
-    left: 50%;
-    line-height: 0%;
+    left: 48%;
+    line-height: 4%;
 }
 .lightbox-prev, .lightbox-next {
     position: absolute;
@@ -287,13 +272,47 @@ h4 i {
     color: #901C1C;
     cursor: pointer;
     z-index: 1;
-}
-  
+} 
 .lightbox-prev {
     left: 60px;
 }
-  
 .lightbox-next {
     right: 60px;
 }
+.likeTarif{
+    position: fixed;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    bottom: 0;
+    right: 20px;
+    background-color: #DB8876;
+    width: 300px;
+    border-radius: 5px 5px 0 0;
+    z-index: 2;
+    padding-left: 3%;
+   
+}
+.totalLike{
+    font-weight: 900;
+    font-size: 24px;
+    vertical-align: middle;
+    display: inline-block;
+    margin: 0;
+    padding-top: 40%;
+
+}
+.heartTotal{
+   padding-top: 40%;
+   width: 30px;
+   height: 30px;
+   vertical-align: middle;
+}
+.price{
+   font-weight: 900;
+   font-size: 24px;
+   white-space: nowrap;
+   margin-left: 30%;
+}
+
+
   
