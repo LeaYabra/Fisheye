@@ -1,3 +1,4 @@
+//recupere les donnees 
 async function getData() {
   try {
     const response = await fetch("data/photographers.json");
@@ -8,9 +9,9 @@ async function getData() {
   }
 }
 
+// ouvrir la modale avec les medias
 function openModal(title, media) {
   console.log("openModal", title, media);
-  // Code pour ouvrir la boîte de dialogue modale
   const modal = document.getElementById("media_modal");
   const lightbox = modal.querySelector(".lightbox");
   if (lightbox) {
@@ -25,6 +26,9 @@ function openModal(title, media) {
   p.textContent = title;
   div.setAttribute("class", "lightbox");
   div.setAttribute("role", "dialog");
+  div.dataset.id = media.id;
+  div.dataset.title = title;
+  
   if (media.type === "picture") {
     const imgModal = document.createElement("img");
     imgModal.setAttribute("src", media.src);
@@ -37,115 +41,94 @@ function openModal(title, media) {
     video.setAttribute("controls", true);
     video.setAttribute("aria-label", title);
     div.appendChild(video);
- 
   }
   p.setAttribute("class", "title");
   modal.appendChild(div);
   div.appendChild(p);
- 
+}
+
+//ouvrir le filtre
+function openFilter() {
+  // Montrer les deux derniers boutons
+   document.querySelector('.filterList').classList.add('show');
+  document.querySelector('.filterList .filterDate').style.visibility = 'visible';
+  document.querySelector('.filterList .filterTitle').style.visibility = 'visible';
+  // Changer la flèche pour montrer qu'elle est ouverte
+  document.querySelector('.filterList .chevronDown').style.visibility = 'hidden';
+  document.querySelector('.filterList .chevronUp').style.visibility = 'visible';
+}
+
+//fermer le filtre
+function closeFilter() {
+  document.querySelector('.filterList').classList.remove('show');
+  // Cacher les deux derniers boutons
+  document.querySelector('.filterList .filterDate').style.visibility = 'hidden';
+  document.querySelector('.filterList .filterTitle').style.visibility = 'hidden';
+  // Changer la flèche pour montrer qu'elle est fermée
+  document.querySelector('.filterList .chevronDown').style.visibility = 'visible';
+  document.querySelector('.filterList .chevronUp').style.visibility = 'hidden';
+}
+// Trier les médias par popularité
+function sortMediaByLikes() {
+  // Sauvegarder la valeur initiale de totalLikes
+  const initialLikes = totalLikes;
+  medias.sort((a, b) => b.likes - a.likes);
+  // Effacer les médias actuels
+  const mediaContainer = document.querySelector(".photographer-media");
+  mediaContainer.innerHTML = "";
+  displayMedia(medias);
+  document.querySelector('.filterPopular').setAttribute("aria-label", "true");
+  document.querySelector('.filterDate').setAttribute("aria-label", "false");
+  document.querySelector('.filterTitle').setAttribute("aria-label", "false");
+
+  // Restaurer la valeur initiale de totalLikes
+  totalLikes = initialLikes;
+  // Mettre à jour l'affichage du nombre total de likes
+  const footer = document.querySelector(".totalLike");
+  footer.innerHTML = `${totalLikes} `;
+  initModalSlider(); 
+}
+
+// Trier les médias par date
+function sortByDateDescending() {
+  // Sauvegarder la valeur initiale de totalLikes
+  const initialLikes = totalLikes;
+  medias.sort((a, b) => new Date(b.date) - new Date(a.date));
+  console.log("new", medias);
+  // Effacer les médias actuels
+  const mediaContainer = document.querySelector(".photographer-media");
+  mediaContainer.innerHTML = "";
+  displayMedia(medias);
+  document.querySelector('.filterPopular').setAttribute("aria-label", "false");
+  document.querySelector('.filterDate').setAttribute("aria-label", "true");
+  document.querySelector('.filterTitle').setAttribute("aria-label", "false");
+
+  // Restaurer la valeur initiale de totalLikes
+  totalLikes = initialLikes;
+  // Mettre à jour l'affichage du nombre total de likes
+  const footer = document.querySelector(".totalLike");
+  footer.innerHTML = `${totalLikes} `;
+}
+
+// Trier les médias par titre
+function sortByTitleAscending() {
+  // Sauvegarder la valeur initiale de totalLikes
+  const initialLikes = totalLikes;
+  medias.sort((a, b) => a.title.localeCompare(b.title));
+  console.log("new", medias);
+
+  // Effacer les médias actuels
+  const mediaContainer = document.querySelector(".photographer-media");
+  mediaContainer.innerHTML = "";
+  displayMedia(medias);
+
+  document.querySelector('.filterPopular').setAttribute("aria-selected", "false");
+  document.querySelector('.filterDate').setAttribute("aria-selected", "false");
+  document.querySelector('.filterTitle').setAttribute("aria-selected", "true");
   
-  // Ajouter les boutons précédent et suivant à la modale
-  const next = document.querySelectorAll(".lightbox-next");
-  const prev = document.querySelectorAll(".lightbox-prev");
-  let currentIndex = 0;
-  let gallery = document.querySelectorAll(".mediaDisplayLink");
-
-  //passer a l'image suivante
-next.forEach((nextButton) => {
-  nextButton.addEventListener("click", (e) => {
-    e.preventDefault();
-      currentIndex++;
-    if (currentIndex >= gallery.length) {
-      currentIndex = 0;
-    }
-    console.log("next",currentIndex)
-    const nextImage = gallery[currentIndex];
-    const nextImgSrc = nextImage.querySelector("img").getAttribute("src"); // Récupère l'URL de l'image
-    const isVideo = nextImgSrc.endsWith(".mp4"); // Vérifie si l'URL se termine par ".mp4"
-    let title = nextImage.getAttribute("aria-label");
-    p.textContent = title;
-    p.setAttribute("class", "title");
-    // Supprime les éléments enfants de l'élément lightbox existant
-    const lightbox = document.querySelector(".lightbox");
-    if (lightbox) {
-      lightbox.innerHTML = "";
-    }
-    modal.style.display = "block";
-    // Ajoute l'élément approprié à l'élément lightbox
-    if (isVideo) {
-      const video = document.createElement("video");
-      video.src = nextImgSrc;
-      video.setAttribute("controls", true);
-      video.setAttribute("aria-label", title);
-      lightbox.appendChild(video);
-      lightbox.appendChild(p);
-    } else {
-      const img = document.createElement("img");
-      img.src = ("src",nextImgSrc);
-      img.setAttribute("class", "imgLightbox");
-      img.setAttribute("alt", title);
-      lightbox.appendChild(img);
-      lightbox.appendChild(p);
-    }
-  });
-});
-  //revient a l'image precedente
-  prev.forEach((prevButton) => {
-    prevButton.addEventListener("click", (e) => {
-      e.preventDefault();
-      currentIndex--;
-      if (currentIndex < 0) {
-        currentIndex = gallery.length - 1; // Réinitialiser au dernier élément de la galerie
-      }
-      console.log("prev", currentIndex);
-      const prevImage = gallery[currentIndex];
-      const prevImgSrc = prevImage.querySelector("img").getAttribute("src"); // Récupère l'URL de l'image
-      const isVideo = prevImgSrc.endsWith(".mp4"); // Vérifie si l'URL se termine par ".mp4"
-      let title = prevImage.getAttribute("aria-label");
-      p.textContent = title;
-      p.setAttribute("class", "title");
-      // Supprime les éléments enfants de l'élément lightbox existant
-      const lightbox = document.querySelector(".lightbox");
-      if (lightbox) {
-        lightbox.innerHTML = "";
-      }  
-      modal.style.display = "block";
-      // Ajoute l'élément approprié à l'élément lightbox
-      if (isVideo) {
-        const video = document.createElement("video");
-        video.src = prevImgSrc;
-        video.setAttribute("controls", true);
-        video.setAttribute("aria-label", title);
-        lightbox.appendChild(video);
-        lightbox.appendChild(p);
-      } else {
-        const img = document.createElement("img");
-        img.src = ("src",prevImgSrc);
-        img.setAttribute("class", "imgLightbox");
-        img.setAttribute("alt", title);
-        lightbox.appendChild(img);
-        lightbox.appendChild(p);
-      }
-    });
-  });
-
-  // passage des images avec le clavier
-  window.addEventListener("keydown", function (event) {
-    if (event.defaultPrevented) {
-      return;
-    }
-  switch (event.key) {
-      case "ArrowLeft":
-        //clique sur fleche precedente
-        prev[0].click();
-        break;
-      case "ArrowRight":
-        // clique sur fleche suivante
-        next[0].click();
-        break;
-       default:
-        return; //fait rien si appuie sur une autre touche
-    }
-    event.preventDefault();
-  }, true); 
+  // Restaurer la valeur initiale de totalLikes
+  totalLikes = initialLikes;
+  // Mettre à jour l'affichage du nombre total de likes
+  const footer = document.querySelector(".totalLike");
+  footer.innerHTML = `${totalLikes} `;
 }

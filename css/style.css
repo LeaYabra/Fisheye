@@ -48,7 +48,7 @@ display: none;
 .photographer_section article {
     justify-self: center;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     flex-direction: column; 
 }
@@ -73,7 +73,7 @@ display: none;
     color: #901C1C;
     font-weight: 400;
     font-size: 13px;
-   line-height: 0em;
+    line-height: 0em;
 }
 .photographer_section article h4 {
     font-weight: 400;

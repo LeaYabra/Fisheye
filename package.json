@@ -1,0 +1,20 @@
+{
+  "name": "front-end-fisheye-main",
+  "version": "1.0.0",
+  "description": "## Démarrer le projet",
+  "main": "index.js",
+
+  "scripts": {
+    "lint": "eslint --rulesdir path/to/your/rules/ --max-warnings=0 ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeaYabra/Fisheye.git"
+  },
+  "author": "lea yabra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeaYabra/Fisheye/issues"
+  },
+  "homepage": "https://github.com/LeaYabra/Fisheye#readme"
+}

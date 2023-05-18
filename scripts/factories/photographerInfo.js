@@ -1,3 +1,4 @@
+//recuperer le photographe de photographer.json
 function photographerInfo(data) {
   const { name, portrait, city, country, price, tagline } = data;
   const picture = `assets/photographers/${portrait}`;
@@ -40,21 +41,21 @@ function photographerInfo(data) {
 // variable pour stocker la totalité de likes
 let totalLikes = 0;
 
+//affcihe les medias du photographe et likes
 function mediaPhotographer(data) {
   const { title, image, video, id, likes } = data;
-
   const picture = `assets/media/${image}`;
   const vid = `assets/media/${video}`;
+  
   function getMediaCardDOM() {
     const article = document.createElement("article");
     const link = document.createElement("a");
     const text = document.createElement("div");
-    text.setAttribute("class", "titleMedia");
-
     const like = document.createElement("span");
-    like.setAttribute("class", "like");
-
     const heart = document.createElement("img");
+
+    text.setAttribute("class", "titleMedia");
+    like.setAttribute("class", "like");
     heart.setAttribute("class", "heart");
     heart.setAttribute("src", "assets/icons/heart.svg");
     heart.setAttribute("alt", "heart");
@@ -101,14 +102,12 @@ function mediaPhotographer(data) {
 
     // Ajoute le nombre de likes de ce média au total des likes
     totalLikes += likes;
-    console.log("ok",totalLikes);
-
     //affiche le nombre total de like
     const footer = document.querySelector(".totalLike");
     footer.innerHTML = `${totalLikes} `;
 
     //de/incremente le nombre de like en fonction du clic
-    heart.addEventListener("click", () => {
+   heart.addEventListener("click", () => {
       const pressed = heart.getAttribute("aria-pressed") === "true" ? "false" : "true";
       heart.setAttribute("aria-pressed", pressed);
       if (pressed === "true") {
@@ -128,5 +127,12 @@ function mediaPhotographer(data) {
     });
     return article;
   }
+  
   return { title, image, id, video, likes, getMediaCardDOM, totalLikes };
 }
+
+
+
+
+
+

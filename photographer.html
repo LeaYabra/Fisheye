@@ -10,13 +10,23 @@
   <body id="body">
     <header>
       <a href="index.html" aria-label="lien vers page accueil">
-      <img src="assets/images/logo.png" class="logo" /> 
+      <img src="assets/images/logo.png" class="logo" alt="logo-fisheye"/> 
      </a>
     </header>
     <main id="main" aria-modal="false">
       <div class="photograph-header">
         <button class="contact_button" onclick="displayModal()" aria-label="contactez-moi" aria-haspopup="dialog" aria-controls="dialog">Contactez-moi</button>
       </div>
+      <div class="filter">
+        <p>Trier par</p>
+          <div class="filterList" role="menu" aria-label="Trier les medias par">
+            <img id="chevron" src="assets/icons/chevronDown.svg" alt="chevronDown" onclick="openFilter()" class="chevronDown" aria-describedby="ouvrir le filtre"/>
+            <img src="assets/icons/chevronUp.svg" alt="closeFilter" class="chevronUp" onclick="closeFilter()" aria-describedby="fermer le filtre"/>
+              <button class="filterPopular" onclick="sortMediaByLikes()" role="menuitem" tabindex="0">Popularité</button>
+              <button class="filterDate" onclick="sortByDateDescending()" role="menuitem"  tabindex="0">Date</button>
+              <button class="filterTitle" onclick="sortByTitleAscending()" role="menuitem" tabindex="0">Titre</button>
+            </div>
+          </div>
       <div class="photographer-media">
        </div>
     </main>
@@ -41,14 +51,14 @@
 						<input type="text" id="message" name="message" placeholder="Saisissez votre message" aria-labelledby="message" />
             <span class="error-message" id="message-error" aria-labelledby="message invalide"></span>
 					</div>
-          <button type="submit" id="submit" aria-label="envoyer le formulaire">Envoyer</button>
+          <button class="btnSubmit" type="submit" id="submit" aria-label="envoyer le formulaire">Envoyer</button>
 				</form>
 			</div>
 		</div>
     <div id="media_modal">
-			<div id="galleryModal" aria-modal="true" role="dialog" aria-describedby="galleryMedia" aria-labelledby="modalgallery">
+			<div class="galleryModal" aria-modal="true" role="dialog" aria-describedby="galleryMedia" aria-labelledby="modalgallery">
 				<header>
-          <img src="assets/icons/closeMedia.svg" alt="closeModal" class="closeModal" onclick="closeModalGallery()" aria-describedby="fermer"/>
+          <img src="assets/icons/closeMedia.svg" alt="closeModal" class="closeModal" onclick="closeModal()" aria-describedby="fermer"/>
         </header>
         <div class="lightbox-prev" aria-label="suivant">&#10094;</div>
         <div class="lightbox-next" aria-label="precedent">&#10095;</div>
@@ -61,9 +71,9 @@
     </div>
     
     <script src="/scripts/utils/functions.js"></script>
-    <script src="/scripts/utils/contactForm.js"></script>
-    <script src="/scripts/pages/photographer.js"></script>
-    <script src="/scripts/factories/photographerInfo.js"></script>
     <script src="/scripts/factories/photographer.js"></script>
+    <script src="/scripts/factories/photographerInfo.js"></script>
+    <script src="/scripts/pages/photographer.js"></script>
+    <script src="/scripts/utils/contactForm.js"></script>
   </body>
 </html>

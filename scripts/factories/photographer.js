@@ -1,3 +1,4 @@
+//recuperer tout les photographes de photographer.json
 function photographerFactory(data) {
     const { href,name, portrait,id, city, country,tagline,price} = data;
     
