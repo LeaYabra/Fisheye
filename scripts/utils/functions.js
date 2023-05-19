@@ -80,13 +80,11 @@ function sortMediaByLikes() {
   document.querySelector('.filterPopular').setAttribute("aria-label", "true");
   document.querySelector('.filterDate').setAttribute("aria-label", "false");
   document.querySelector('.filterTitle').setAttribute("aria-label", "false");
-
   // Restaurer la valeur initiale de totalLikes
   totalLikes = initialLikes;
   // Mettre à jour l'affichage du nombre total de likes
   const footer = document.querySelector(".totalLike");
   footer.innerHTML = `${totalLikes} `;
-  initModalSlider(); 
 }
 
 // Trier les médias par date

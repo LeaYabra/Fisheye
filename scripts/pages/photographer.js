@@ -18,7 +18,7 @@ async function init() {
   medias = myMedia;
   console.log(myMedia);
   displayMedia(myMedia);
-
+  initModalSlider();
   //ajout du prix par jour
   const footer = document.querySelector(".price");
   footer.innerHTML = `${myPhotographer.price} €/jour`;
@@ -68,7 +68,6 @@ async function displayMedia(medias) {
     mediaSection.appendChild(mediaCardDOM);
   });
   modalAddEventListener();
-  initModalSlider();
 }
 
 //lightbox medias
