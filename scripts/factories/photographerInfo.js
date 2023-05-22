@@ -4,7 +4,7 @@ function photographerInfo(data) {
   const { name, portrait, city, country, price, tagline } = data;
   const picture = `assets/photographers/${portrait}`;
   const classe = `information`;
-  
+
   function getUserInfoDOM() {
     const article = document.createElement("article");
     const div = document.createElement("div");
@@ -48,7 +48,7 @@ function mediaPhotographer(data) {
   const { title, image, video, id, likes } = data;
   const picture = `assets/media/${image}`;
   const vid = `assets/media/${video}`;
-  
+
   function getMediaCardDOM() {
     const article = document.createElement("article");
     const link = document.createElement("a");
@@ -110,7 +110,8 @@ function mediaPhotographer(data) {
 
     //de/incremente le nombre de like en fonction du clic
     heart.addEventListener("click", () => {
-      const pressed = heart.getAttribute("aria-pressed") === "true" ? "false" : "true";
+      const pressed =
+        heart.getAttribute("aria-pressed") === "true" ? "false" : "true";
       heart.setAttribute("aria-pressed", pressed);
       if (pressed === "true") {
         h4.textContent = parseInt(h4.textContent) + 1;
@@ -129,12 +130,6 @@ function mediaPhotographer(data) {
     });
     return article;
   }
-  
+
   return { title, image, id, video, likes, getMediaCardDOM, totalLikes };
 }
-
-
-
-
-
-

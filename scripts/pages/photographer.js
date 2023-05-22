@@ -1,21 +1,19 @@
+/* globals getData, photographerInfo, openModal, mediaPhotographer */
 let medias = [];
 //recupere id,les info et medias du photographe
 async function init() {
   const urlParams = new URLSearchParams(window.location.search);
   const id = urlParams.get("id");
-  // eslint-disable-next-line no-undef
   const data = await getData();
   const photographers = data.photographers;
   console.log(photographers);
   const myPhotographer = photographers.find(function (photographer) {
-    // eslint-disable-next-line eqeqeq
-    return photographer.id == id;
+    return photographer.id.toString() === id.toString();
   });
   console.log(myPhotographer);
   displayPhotographer(myPhotographer);
   const myMedia = data.media.filter(function (media) {
-    // eslint-disable-next-line eqeqeq
-    return media.photographerId == id;
+    return media.photographerId.toString() === id.toString();
   });
   medias = myMedia;
   console.log(myMedia);
@@ -24,7 +22,7 @@ async function init() {
   //ajout du prix par jour
   const footer = document.querySelector(".price");
   footer.innerHTML = `${myPhotographer.price} €/jour`;
-  
+
   // ajout du nom de photographe dans modal contact
   const header = document.getElementById("modalTitle");
   header.innerHTML = `Contactez-moi <br>${myPhotographer.name}`;
@@ -33,7 +31,6 @@ init();
 // affiche les info du photographe
 async function displayPhotographer(photographer) {
   const photographerSection = document.querySelector(".photograph-header");
-  // eslint-disable-next-line no-undef
   const photographerModel = photographerInfo(photographer);
   const userCardDOM = photographerModel.getUserInfoDOM();
   photographerSection.appendChild(userCardDOM);
@@ -54,7 +51,6 @@ function modalAddEventListener() {
         title = e.srcElement.getAttribute("alt");
       }
       // je recupère le titre et la source
-      // eslint-disable-next-line no-undef
       openModal(title, {
         type,
         src: e.srcElement.getAttribute("src"),
@@ -67,7 +63,6 @@ function modalAddEventListener() {
 async function displayMedia(medias) {
   const mediaSection = document.querySelector(".photographer-media");
   medias.forEach((media) => {
-    // eslint-disable-next-line no-undef
     const mediaModel = mediaPhotographer(media);
     const mediaCardDOM = mediaModel.getMediaCardDOM();
     mediaSection.appendChild(mediaCardDOM);
@@ -84,7 +79,7 @@ function initModalSlider() {
   const findCurrentIndex = (mediaId) => {
     console.log("find ", mediaId, " in ", medias);
     return medias.findIndex((media) => media.id.toString() === mediaId);
-  }
+  };
   // passer a l'image suivante
   next.forEach((nextButton) => {
     nextButton.addEventListener("click", (e) => {
@@ -111,8 +106,6 @@ function initModalSlider() {
       const p = document.createElement("p");
       p.textContent = title;
       p.setAttribute("class", "title");
-      // eslint-disable-next-line no-undef
-      modal.style.display = "block";
       // Ajoute l'élément approprié à l'élément lightbox
       if (isVideo) {
         const video = document.createElement("video");
@@ -131,7 +124,7 @@ function initModalSlider() {
       }
     });
   });
-  
+
   //revient a l'image precedente
   prev.forEach((prevButton) => {
     prevButton.addEventListener("click", (e) => {
@@ -158,8 +151,6 @@ function initModalSlider() {
       const p = document.createElement("p");
       p.textContent = title;
       p.setAttribute("class", "title");
-      // eslint-disable-next-line no-undef
-      modal.style.display = "block";
 
       // Ajoute l'élément approprié à l'élément lightbox
       if (isVideo) {
@@ -205,16 +196,17 @@ function initModalSlider() {
   );
 
   //lecture de video avec clavier
-  window.addEventListener("keydown", function(event) {
+  window.addEventListener("keydown", function (event) {
     const lightbox = document.querySelector(".lightbox");
-    if (event.key === " ") { // Touche d'espace
+    if (event.key === " ") {
+      // Touche d'espace
       const videoElement = lightbox.querySelector("video");
-      event.preventDefault(); 
+      event.preventDefault();
       if (videoElement.paused) {
         videoElement.play();
       } else {
         videoElement.pause();
-      }  
+      }
     }
   });
 }

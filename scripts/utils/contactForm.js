@@ -1,5 +1,3 @@
-// eslint-disable-next-line no-unused-vars
-const modal = document.querySelector('.modal');
 //ouvre la modale contact
 // eslint-disable-next-line no-unused-vars
 function displayModal() {
@@ -18,18 +16,18 @@ function closeModal() {
 
 //Fermer la modale avec le clavier
 function closeModalOnEscape(event) {
-  if (event.key === 'Escape' || event.keyCode === 27) {
+  if (event.key === "Escape" || event.keyCode === 27) {
     closeModal();
   }
 }
-document.addEventListener('keydown', closeModalOnEscape);
+document.addEventListener("keydown", closeModalOnEscape);
 
 // Fermer la modale quand on clique en dehors
-window.onclick = function(event) {
+window.onclick = function (event) {
   if (event.target === document.getElementById("contact_modal")) {
     closeModal();
   }
-}
+};
 
 //verifier email
 function isValidEmail(email) {
@@ -39,13 +37,17 @@ function isValidEmail(email) {
 }
 
 //envoi du formulaire
-const form = document.getElementById('contact-form');
+const form = document.getElementById("contact-form");
+const prenom = document.getElementById("prenom");
+const nom = document.getElementById("nom");
+const email = document.getElementById("email");
+const message = document.getElementById("message");
 const prenomError = document.querySelector("#prenom-error");
 const nomError = document.querySelector("#nom-error");
 const emailError = document.querySelector("#email-error");
 const messageError = document.querySelector("#message-error");
 const submitBtn = document.getElementById("submit");
-submitBtn.onclick = function(event)  {
+submitBtn.onclick = function (event) {
   event.preventDefault();
   const formData = new FormData(form);
   const errorMessages = document.getElementsByClassName("error-message");
@@ -58,55 +60,44 @@ submitBtn.onclick = function(event)  {
   });
   let isValid = true;
 
-  if (formData.get("prenom") .trim().length <2) {
-    // eslint-disable-next-line no-undef
+  if (formData.get("prenom").trim().length < 2) {
     prenom.classList.add("error");
-    prenomError.textContent = "Veuillez saisir 2 caractères ou plus pour le prénom.";
-    // eslint-disable-next-line no-undef
+    prenomError.textContent =
+      "Veuillez saisir 2 caractères ou plus pour le prénom.";
     prenom.focus();
     return false;
   }
-  if (formData.get("nom").trim().length <2) {
-    // eslint-disable-next-line no-undef
+  if (formData.get("nom").trim().length < 2) {
     nom.classList.add("error");
-    nomError.textContent ="Veuillez saisir 2 caractères ou plus pour le nom.";
-    // eslint-disable-next-line no-undef
+    nomError.textContent = "Veuillez saisir 2 caractères ou plus pour le nom.";
     nom.focus();
     return false;
   }
   if (formData.get("email") === "") {
-    // eslint-disable-next-line no-undef
     email.classList.add("error");
     emailError.textContent = "Veuillez saisir une adresse email.";
-    // eslint-disable-next-line no-undef
     email.focus();
     return false;
   } else if (!isValidEmail(formData.get("email"))) {
-    // eslint-disable-next-line no-undef
     email.classList.add("error");
     emailError.textContent = "L'adresse email n'est pas valide.";
-    // eslint-disable-next-line no-undef
     email.focus();
     return false;
   }
-  if (formData.get("message").trim().length <5) {
-    // eslint-disable-next-line no-undef
+  if (formData.get("message").trim().length < 5) {
     message.classList.add("error");
-    messageError.textContent = "Veuillez saisir 5 caractères ou plus pour le message.";
-    // eslint-disable-next-line no-undef
+    messageError.textContent =
+      "Veuillez saisir 5 caractères ou plus pour le message.";
     message.focus();
     return false;
   }
-  console.log("prenom:",formData.get("prenom"));
-  console.log("nom:",formData.get("nom"));
-  console.log("email:",formData.get("email"));
-  console.log("message:",formData.get("message"));
+  console.log("prenom:", formData.get("prenom"));
+  console.log("nom:", formData.get("nom"));
+  console.log("email:", formData.get("email"));
+  console.log("message:", formData.get("message"));
 
   if (isValid) {
-    alert('Votre message a bien été envoyé.');
+    alert("Votre message a bien été envoyé.");
     closeModal();
   }
 };
-
-
-  
