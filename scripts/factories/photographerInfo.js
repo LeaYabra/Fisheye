@@ -1,4 +1,5 @@
 //recuperer le photographe de photographer.json
+// eslint-disable-next-line no-unused-vars
 function photographerInfo(data) {
   const { name, portrait, city, country, price, tagline } = data;
   const picture = `assets/photographers/${portrait}`;
@@ -41,7 +42,8 @@ function photographerInfo(data) {
 // variable pour stocker la totalité de likes
 let totalLikes = 0;
 
-//affcihe les medias du photographe et likes
+//affiche les medias du photographe et likes
+// eslint-disable-next-line no-unused-vars
 function mediaPhotographer(data) {
   const { title, image, video, id, likes } = data;
   const picture = `assets/media/${image}`;
@@ -107,7 +109,7 @@ function mediaPhotographer(data) {
     footer.innerHTML = `${totalLikes} `;
 
     //de/incremente le nombre de like en fonction du clic
-   heart.addEventListener("click", () => {
+    heart.addEventListener("click", () => {
       const pressed = heart.getAttribute("aria-pressed") === "true" ? "false" : "true";
       heart.setAttribute("aria-pressed", pressed);
       if (pressed === "true") {

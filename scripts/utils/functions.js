@@ -1,4 +1,5 @@
 //recupere les donnees 
+// eslint-disable-next-line no-unused-vars
 async function getData() {
   try {
     const response = await fetch("data/photographers.json");
@@ -10,6 +11,7 @@ async function getData() {
 }
 
 // ouvrir la modale avec les medias
+// eslint-disable-next-line no-unused-vars
 function openModal(title, media) {
   console.log("openModal", title, media);
   const modal = document.getElementById("media_modal");
@@ -48,9 +50,10 @@ function openModal(title, media) {
 }
 
 //ouvrir le filtre
+// eslint-disable-next-line no-unused-vars
 function openFilter() {
   // Montrer les deux derniers boutons
-   document.querySelector('.filterList').classList.add('show');
+  document.querySelector('.filterList').classList.add('show');
   document.querySelector('.filterList .filterDate').style.visibility = 'visible';
   document.querySelector('.filterList .filterTitle').style.visibility = 'visible';
   // Changer la flèche pour montrer qu'elle est ouverte
@@ -59,6 +62,7 @@ function openFilter() {
 }
 
 //fermer le filtre
+// eslint-disable-next-line no-unused-vars
 function closeFilter() {
   document.querySelector('.filterList').classList.remove('show');
   // Cacher les deux derniers boutons
@@ -69,55 +73,68 @@ function closeFilter() {
   document.querySelector('.filterList .chevronUp').style.visibility = 'hidden';
 }
 // Trier les médias par popularité
+// eslint-disable-next-line no-unused-vars
 function sortMediaByLikes() {
   // Sauvegarder la valeur initiale de totalLikes
+  // eslint-disable-next-line no-undef
   const initialLikes = totalLikes;
+  // eslint-disable-next-line no-undef
   medias.sort((a, b) => b.likes - a.likes);
   // Effacer les médias actuels
   const mediaContainer = document.querySelector(".photographer-media");
   mediaContainer.innerHTML = "";
+  // eslint-disable-next-line no-undef
   displayMedia(medias);
   document.querySelector('.filterPopular').setAttribute("aria-label", "true");
   document.querySelector('.filterDate').setAttribute("aria-label", "false");
   document.querySelector('.filterTitle').setAttribute("aria-label", "false");
   // Restaurer la valeur initiale de totalLikes
+  // eslint-disable-next-line no-undef
   totalLikes = initialLikes;
   // Mettre à jour l'affichage du nombre total de likes
   const footer = document.querySelector(".totalLike");
+  // eslint-disable-next-line no-undef
   footer.innerHTML = `${totalLikes} `;
 }
 
 // Trier les médias par date
+// eslint-disable-next-line no-unused-vars
 function sortByDateDescending() {
   // Sauvegarder la valeur initiale de totalLikes
+  // eslint-disable-next-line no-undef
   const initialLikes = totalLikes;
+  // eslint-disable-next-line no-undef
   medias.sort((a, b) => new Date(b.date) - new Date(a.date));
-  console.log("new", medias);
   // Effacer les médias actuels
   const mediaContainer = document.querySelector(".photographer-media");
   mediaContainer.innerHTML = "";
+  // eslint-disable-next-line no-undef
   displayMedia(medias);
   document.querySelector('.filterPopular').setAttribute("aria-label", "false");
   document.querySelector('.filterDate').setAttribute("aria-label", "true");
   document.querySelector('.filterTitle').setAttribute("aria-label", "false");
 
   // Restaurer la valeur initiale de totalLikes
+  // eslint-disable-next-line no-undef
   totalLikes = initialLikes;
   // Mettre à jour l'affichage du nombre total de likes
   const footer = document.querySelector(".totalLike");
+  // eslint-disable-next-line no-undef
   footer.innerHTML = `${totalLikes} `;
 }
 
 // Trier les médias par titre
+// eslint-disable-next-line no-unused-vars
 function sortByTitleAscending() {
   // Sauvegarder la valeur initiale de totalLikes
+  // eslint-disable-next-line no-undef
   const initialLikes = totalLikes;
+  // eslint-disable-next-line no-undef
   medias.sort((a, b) => a.title.localeCompare(b.title));
-  console.log("new", medias);
-
   // Effacer les médias actuels
   const mediaContainer = document.querySelector(".photographer-media");
   mediaContainer.innerHTML = "";
+  // eslint-disable-next-line no-undef
   displayMedia(medias);
 
   document.querySelector('.filterPopular').setAttribute("aria-selected", "false");
@@ -125,8 +142,10 @@ function sortByTitleAscending() {
   document.querySelector('.filterTitle').setAttribute("aria-selected", "true");
   
   // Restaurer la valeur initiale de totalLikes
+  // eslint-disable-next-line no-undef
   totalLikes = initialLikes;
   // Mettre à jour l'affichage du nombre total de likes
   const footer = document.querySelector(".totalLike");
+  // eslint-disable-next-line no-undef
   footer.innerHTML = `${totalLikes} `;
 }

@@ -1,18 +1,20 @@
 let medias = [];
-let totalLike = 0;
 //recupere id,les info et medias du photographe
 async function init() {
   const urlParams = new URLSearchParams(window.location.search);
   const id = urlParams.get("id");
+  // eslint-disable-next-line no-undef
   const data = await getData();
   const photographers = data.photographers;
   console.log(photographers);
   const myPhotographer = photographers.find(function (photographer) {
+    // eslint-disable-next-line eqeqeq
     return photographer.id == id;
   });
   console.log(myPhotographer);
   displayPhotographer(myPhotographer);
   const myMedia = data.media.filter(function (media) {
+    // eslint-disable-next-line eqeqeq
     return media.photographerId == id;
   });
   medias = myMedia;
@@ -28,14 +30,15 @@ async function init() {
   header.innerHTML = `Contactez-moi <br>${myPhotographer.name}`;
 }
 init();
-
 // affiche les info du photographe
 async function displayPhotographer(photographer) {
   const photographerSection = document.querySelector(".photograph-header");
+  // eslint-disable-next-line no-undef
   const photographerModel = photographerInfo(photographer);
   const userCardDOM = photographerModel.getUserInfoDOM();
   photographerSection.appendChild(userCardDOM);
 }
+
 //afficher dans modal image ou video selon le type avec titre
 function modalAddEventListener() {
   let mediasDisplayLink = document.querySelectorAll(".mediaDisplayLink");
@@ -51,6 +54,7 @@ function modalAddEventListener() {
         title = e.srcElement.getAttribute("alt");
       }
       // je recupère le titre et la source
+      // eslint-disable-next-line no-undef
       openModal(title, {
         type,
         src: e.srcElement.getAttribute("src"),
@@ -59,10 +63,11 @@ function modalAddEventListener() {
     });
   });
 }
-//afiche les medias
+//affiche les medias
 async function displayMedia(medias) {
   const mediaSection = document.querySelector(".photographer-media");
   medias.forEach((media) => {
+    // eslint-disable-next-line no-undef
     const mediaModel = mediaPhotographer(media);
     const mediaCardDOM = mediaModel.getMediaCardDOM();
     mediaSection.appendChild(mediaCardDOM);
@@ -84,8 +89,8 @@ function initModalSlider() {
   next.forEach((nextButton) => {
     nextButton.addEventListener("click", (e) => {
       e.preventDefault();
-     let lightbox = document.querySelector(".lightbox");
-     let currentIndex = findCurrentIndex(lightbox.dataset.id);
+      let lightbox = document.querySelector(".lightbox");
+      let currentIndex = findCurrentIndex(lightbox.dataset.id);
       // Supprime les éléments de la lightbox existant
       if (lightbox) {
         lightbox.innerHTML = "";
@@ -106,6 +111,7 @@ function initModalSlider() {
       const p = document.createElement("p");
       p.textContent = title;
       p.setAttribute("class", "title");
+      // eslint-disable-next-line no-undef
       modal.style.display = "block";
       // Ajoute l'élément approprié à l'élément lightbox
       if (isVideo) {
@@ -115,7 +121,7 @@ function initModalSlider() {
         video.setAttribute("aria-label", title);
         lightbox.appendChild(video);
         lightbox.appendChild(p);
-       } else {
+      } else {
         const img = document.createElement("img");
         img.src = ("src", nextImgSrc);
         img.setAttribute("class", "imgLightbox");
@@ -152,6 +158,7 @@ function initModalSlider() {
       const p = document.createElement("p");
       p.textContent = title;
       p.setAttribute("class", "title");
+      // eslint-disable-next-line no-undef
       modal.style.display = "block";
 
       // Ajoute l'élément approprié à l'élément lightbox
@@ -173,7 +180,7 @@ function initModalSlider() {
     });
   });
 
-// passage des images avec le clavier
+  // passage des images avec le clavier
   window.addEventListener(
     "keydown",
     function (event) {
@@ -189,33 +196,25 @@ function initModalSlider() {
           // clique sur fleche suivante
           next[0].click();
           break;
-         default:return; //fait rien si appuie sur une autre touche
+        default:
+          return; //fait rien si appuie sur une autre touche
       }
       event.preventDefault();
     },
     true
   );
 
-//lecture de video avec clavier
- window.addEventListener("keydown", function(event) {
+  //lecture de video avec clavier
+  window.addEventListener("keydown", function(event) {
     const lightbox = document.querySelector(".lightbox");
     if (event.key === " ") { // Touche d'espace
-    const videoElement = lightbox.querySelector("video");
-    event.preventDefault(); 
-    if (videoElement.paused) {
-      videoElement.play();
-    } else {
-      videoElement.pause();
-    }  
+      const videoElement = lightbox.querySelector("video");
+      event.preventDefault(); 
+      if (videoElement.paused) {
+        videoElement.play();
+      } else {
+        videoElement.pause();
+      }  
     }
   });
 }
-
-
-
-
-
-
-
-
-
