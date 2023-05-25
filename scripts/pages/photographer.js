@@ -22,7 +22,7 @@ async function init() {
   //ajout du prix par jour
   const footer = document.querySelector(".price");
   footer.innerHTML = `${myPhotographer.price} €/jour`;
-  
+
   // ajout du nom de photographe dans modal contact
   const header = document.getElementById("modalTitle");
   header.innerHTML = `Contactez-moi <br>${myPhotographer.name}`;
@@ -124,7 +124,7 @@ function initModalSlider() {
       }
     });
   });
-  
+
   //revient a l'image precedente
   prev.forEach((prevButton) => {
     prevButton.addEventListener("click", (e) => {
@@ -196,16 +196,17 @@ function initModalSlider() {
   );
 
   //lecture de video avec clavier
-  window.addEventListener("keydown", function(event) {
+  window.addEventListener("keydown", function (event) {
     const lightbox = document.querySelector(".lightbox");
-    if (event.key === " ") { // Touche d'espace
+    if (event.key === " ") {
+      // Touche d'espace
       const videoElement = lightbox.querySelector("video");
-      event.preventDefault(); 
+      event.preventDefault();
       if (videoElement.paused) {
         videoElement.play();
       } else {
         videoElement.pause();
-      }  
+      }
     }
   });
 }

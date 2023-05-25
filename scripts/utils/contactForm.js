@@ -16,18 +16,18 @@ function closeModal() {
 
 //Fermer la modale avec le clavier
 function closeModalOnEscape(event) {
-  if (event.key === 'Escape' || event.keyCode === 27) {
+  if (event.key === "Escape" || event.keyCode === 27) {
     closeModal();
   }
 }
-document.addEventListener('keydown', closeModalOnEscape);
+document.addEventListener("keydown", closeModalOnEscape);
 
 // Fermer la modale quand on clique en dehors
-window.onclick = function(event) {
+window.onclick = function (event) {
   if (event.target === document.getElementById("contact_modal")) {
     closeModal();
   }
-}
+};
 
 //verifier email
 function isValidEmail(email) {
@@ -47,7 +47,7 @@ const nomError = document.querySelector("#nom-error");
 const emailError = document.querySelector("#email-error");
 const messageError = document.querySelector("#message-error");
 const submitBtn = document.getElementById("submit");
-submitBtn.onclick = function(event)  {
+submitBtn.onclick = function (event) {
   event.preventDefault();
   const formData = new FormData(form);
   const errorMessages = document.getElementsByClassName("error-message");
@@ -89,16 +89,13 @@ submitBtn.onclick = function(event)  {
     message.focus();
     return false;
   }
-  console.log("prenom:",formData.get("prenom"));
-  console.log("nom:",formData.get("nom"));
-  console.log("email:",formData.get("email"));
-  console.log("message:",formData.get("message"));
+  console.log("prenom:", formData.get("prenom"));
+  console.log("nom:", formData.get("nom"));
+  console.log("email:", formData.get("email"));
+  console.log("message:", formData.get("message"));
 
   if (isValid) {
-    alert('Votre message a bien été envoyé.');
+    alert("Votre message a bien été envoyé.");
     closeModal();
   }
 };
-
-
-  
