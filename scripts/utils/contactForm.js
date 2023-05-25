@@ -1,5 +1,3 @@
-// eslint-disable-next-line no-unused-vars
-const modal = document.querySelector('.modal');
 //ouvre la modale contact
 // eslint-disable-next-line no-unused-vars
 function displayModal() {
@@ -40,6 +38,10 @@ function isValidEmail(email) {
 
 //envoi du formulaire
 const form = document.getElementById('contact-form');
+const prenom = document.getElementById("prenom");
+const nom = document.getElementById("nom");
+const email = document.getElementById("email");
+const message = document.getElementById("message");
 const prenomError = document.querySelector("#prenom-error");
 const nomError = document.querySelector("#nom-error");
 const emailError = document.querySelector("#email-error");
@@ -59,41 +61,31 @@ submitBtn.onclick = function(event)  {
   let isValid = true;
 
   if (formData.get("prenom") .trim().length <2) {
-    // eslint-disable-next-line no-undef
     prenom.classList.add("error");
     prenomError.textContent = "Veuillez saisir 2 caractères ou plus pour le prénom.";
-    // eslint-disable-next-line no-undef
     prenom.focus();
     return false;
   }
   if (formData.get("nom").trim().length <2) {
-    // eslint-disable-next-line no-undef
     nom.classList.add("error");
     nomError.textContent ="Veuillez saisir 2 caractères ou plus pour le nom.";
-    // eslint-disable-next-line no-undef
     nom.focus();
     return false;
   }
   if (formData.get("email") === "") {
-    // eslint-disable-next-line no-undef
     email.classList.add("error");
     emailError.textContent = "Veuillez saisir une adresse email.";
-    // eslint-disable-next-line no-undef
     email.focus();
     return false;
   } else if (!isValidEmail(formData.get("email"))) {
-    // eslint-disable-next-line no-undef
     email.classList.add("error");
     emailError.textContent = "L'adresse email n'est pas valide.";
-    // eslint-disable-next-line no-undef
     email.focus();
     return false;
   }
   if (formData.get("message").trim().length <5) {
-    // eslint-disable-next-line no-undef
     message.classList.add("error");
     messageError.textContent = "Veuillez saisir 5 caractères ou plus pour le message.";
-    // eslint-disable-next-line no-undef
     message.focus();
     return false;
   }

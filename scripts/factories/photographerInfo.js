@@ -1,4 +1,5 @@
 //recuperer le photographe de photographer.json
+/* globals medias, displayMedia*/
 // eslint-disable-next-line no-unused-vars
 function photographerInfo(data) {
   const { name, portrait, city, country, price, tagline } = data;
@@ -39,16 +40,14 @@ function photographerInfo(data) {
   return { name, city, country, tagline, price, getUserInfoDOM };
 }
 
-// variable pour stocker la totalité de likes
 let totalLikes = 0;
-
 //affiche les medias du photographe et likes
 // eslint-disable-next-line no-unused-vars
 function mediaPhotographer(data) {
+
   const { title, image, video, id, likes } = data;
   const picture = `assets/media/${image}`;
   const vid = `assets/media/${video}`;
-  
   function getMediaCardDOM() {
     const article = document.createElement("article");
     const link = document.createElement("a");
@@ -64,7 +63,6 @@ function mediaPhotographer(data) {
     heart.setAttribute("aria-describedby", "liker");
     heart.setAttribute("aria-label", "je n'aime pas");
     heart.setAttribute("aria-pressed", "false");
-
     if (image) {
       const img = document.createElement("img");
       img.setAttribute("src", picture);
@@ -101,7 +99,7 @@ function mediaPhotographer(data) {
     text.appendChild(like);
     like.appendChild(h4);
     like.appendChild(heart);
-
+   
     // Ajoute le nombre de likes de ce média au total des likes
     totalLikes += likes;
     //affiche le nombre total de like
@@ -110,7 +108,8 @@ function mediaPhotographer(data) {
 
     //de/incremente le nombre de like en fonction du clic
     heart.addEventListener("click", () => {
-      const pressed = heart.getAttribute("aria-pressed") === "true" ? "false" : "true";
+      const pressed =
+        heart.getAttribute("aria-pressed") === "true" ? "false" : "true";
       heart.setAttribute("aria-pressed", pressed);
       if (pressed === "true") {
         h4.textContent = parseInt(h4.textContent) + 1;
@@ -129,11 +128,55 @@ function mediaPhotographer(data) {
     });
     return article;
   }
-  
+
   return { title, image, id, video, likes, getMediaCardDOM, totalLikes };
 }
 
+//trier les medias par popularite
+// eslint-disable-next-line no-unused-vars
+function sortMediaByLikes() {
+  // Sauvegarder la valeur initiale de totalLikes
+  totalLikes = 0;
+  medias.sort((a, b) => b.likes - a.likes);
+  // Effacer les médias actuels
+  const mediaContainer = document.querySelector(".photographer-media");
+  mediaContainer.innerHTML = "";
+  displayMedia(medias);
+  
+  document.querySelector(".filterPopular").setAttribute("aria-label", "true");
+  document.querySelector(".filterDate").setAttribute("aria-label", "false");
+  document.querySelector(".filterTitle").setAttribute("aria-label", "false");
+}
+// Trier les médias par date
+// eslint-disable-next-line no-unused-vars
+function sortByDateDescending() {
+  // Sauvegarder la valeur initiale de totalLikes
+  totalLikes = 0;
+  medias.sort((a, b) => new Date(b.date) - new Date(a.date));
+  // Effacer les médias actuels
+  const mediaContainer = document.querySelector(".photographer-media");
+  mediaContainer.innerHTML = "";
+  displayMedia(medias);
+  document.querySelector(".filterPopular").setAttribute("aria-label", "false");
+  document.querySelector(".filterDate").setAttribute("aria-label", "true");
+  document.querySelector(".filterTitle").setAttribute("aria-label", "false");
+}
 
+// Trier les médias par titre
+// eslint-disable-next-line no-unused-vars
+function sortByTitleAscending() {
+  // Sauvegarder la valeur initiale de totalLikes
+  totalLikes = 0;
+  medias.sort((a, b) => a.title.localeCompare(b.title));
+  // Effacer les médias actuels
+  const mediaContainer = document.querySelector(".photographer-media");
+  mediaContainer.innerHTML = "";
+  displayMedia(medias);
+
+  document.querySelector('.filterPopular').setAttribute("aria-selected", "false");
+  document.querySelector('.filterDate').setAttribute("aria-selected", "false");
+  document.querySelector('.filterTitle').setAttribute("aria-selected", "true");
+}
 
 
 
