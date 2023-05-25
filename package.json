@@ -1,7 +1,7 @@
 {
  "name": "front-end-fisheye-main",
   "version": "1.0.0",
-  "description": "## Démarrer le projet",
+  "description": "Démarrer le projet",
   "main": "index.js", 
   "scripts": {
     "lint": "eslint --max-warnings=0 ./scripts/**"

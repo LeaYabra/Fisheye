@@ -1,6 +1,6 @@
-//recuperer le photographe de photographer.json
 /* globals medias, displayMedia*/
-// eslint-disable-next-line no-unused-vars
+//recuperer le photographe de photographer.json
+//eslint-disable-next-line no-unused-vars
 function photographerInfo(data) {
   const { name, portrait, city, country, price, tagline } = data;
   const picture = `assets/photographers/${portrait}`;
@@ -48,10 +48,6 @@ function mediaPhotographer(data) {
   const { title, image, video, id, likes } = data;
   const picture = `assets/media/${image}`;
   const vid = `assets/media/${video}`;
-<<<<<<< HEAD
-=======
-
->>>>>>> 8de4a750003976e6e8d7455bda036d0d3c0740aa
   function getMediaCardDOM() {
     const article = document.createElement("article");
     const link = document.createElement("a");
@@ -135,7 +131,6 @@ function mediaPhotographer(data) {
 
   return { title, image, id, video, likes, getMediaCardDOM, totalLikes };
 }
-<<<<<<< HEAD
 
 //trier les medias par popularite
 // eslint-disable-next-line no-unused-vars
@@ -147,7 +142,6 @@ function sortMediaByLikes() {
   const mediaContainer = document.querySelector(".photographer-media");
   mediaContainer.innerHTML = "";
   displayMedia(medias);
-  
   document.querySelector(".filterPopular").setAttribute("aria-label", "true");
   document.querySelector(".filterDate").setAttribute("aria-label", "false");
   document.querySelector(".filterTitle").setAttribute("aria-label", "false");
@@ -177,7 +171,6 @@ function sortByTitleAscending() {
   const mediaContainer = document.querySelector(".photographer-media");
   mediaContainer.innerHTML = "";
   displayMedia(medias);
-
   document.querySelector('.filterPopular').setAttribute("aria-selected", "false");
   document.querySelector('.filterDate').setAttribute("aria-selected", "false");
   document.querySelector('.filterTitle').setAttribute("aria-selected", "true");
@@ -186,5 +179,3 @@ function sortByTitleAscending() {
 
 
 
-=======
->>>>>>> 8de4a750003976e6e8d7455bda036d0d3c0740aa

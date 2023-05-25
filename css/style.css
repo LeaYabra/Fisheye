@@ -13,7 +13,6 @@ header {
     align-items: center;
     height: 90px;
 }
-
 h1 {
     color: #901C1C;
     margin-right: 100px;
@@ -59,8 +58,6 @@ display: none;
     background: #C4C4C4;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
 }
-
-
 .photographer_section article h2 {
     color: #D3573C;
     font-weight: 400;

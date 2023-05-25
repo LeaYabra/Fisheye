@@ -40,9 +40,5 @@ function photographerFactory(data) {
     article.appendChild(p);
     return article;
   }
-<<<<<<< HEAD
   return {name, picture,city,country,tagline,price, getUserCardDOM };
-=======
-  return { name, picture, city, country, tagline, price, getUserCardDOM };
->>>>>>> 8de4a750003976e6e8d7455bda036d0d3c0740aa
 }

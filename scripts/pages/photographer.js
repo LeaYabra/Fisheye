@@ -22,12 +22,12 @@ async function init() {
   //ajout du prix par jour
   const footer = document.querySelector(".price");
   footer.innerHTML = `${myPhotographer.price} €/jour`;
-
   // ajout du nom de photographe dans modal contact
   const header = document.getElementById("modalTitle");
   header.innerHTML = `Contactez-moi <br>${myPhotographer.name}`;
 }
 init();
+
 // affiche les info du photographe
 async function displayPhotographer(photographer) {
   const photographerSection = document.querySelector(".photograph-header");
