@@ -1,4 +1,5 @@
-//recupere les donnees 
+/* globals medias, displayMedia */
+//recupere les donnees
 // eslint-disable-next-line no-unused-vars
 async function getData() {
   try {
@@ -30,7 +31,7 @@ function openModal(title, media) {
   div.setAttribute("role", "dialog");
   div.dataset.id = media.id;
   div.dataset.title = title;
-  
+
   if (media.type === "picture") {
     const imgModal = document.createElement("img");
     imgModal.setAttribute("src", media.src);
@@ -53,99 +54,76 @@ function openModal(title, media) {
 // eslint-disable-next-line no-unused-vars
 function openFilter() {
   // Montrer les deux derniers boutons
-  document.querySelector('.filterList').classList.add('show');
-  document.querySelector('.filterList .filterDate').style.visibility = 'visible';
-  document.querySelector('.filterList .filterTitle').style.visibility = 'visible';
+  document.querySelector(".filterList").classList.add("show");
+  document.querySelector(".filterList .filterDate").style.visibility =
+    "visible";
+  document.querySelector(".filterList .filterTitle").style.visibility =
+    "visible";
   // Changer la flèche pour montrer qu'elle est ouverte
-  document.querySelector('.filterList .chevronDown').style.visibility = 'hidden';
-  document.querySelector('.filterList .chevronUp').style.visibility = 'visible';
+  document.querySelector(".filterList .chevronDown").style.visibility =
+    "hidden";
+  document.querySelector(".filterList .chevronUp").style.visibility = "visible";
 }
 
 //fermer le filtre
 // eslint-disable-next-line no-unused-vars
 function closeFilter() {
-  document.querySelector('.filterList').classList.remove('show');
+  document.querySelector(".filterList").classList.remove("show");
   // Cacher les deux derniers boutons
-  document.querySelector('.filterList .filterDate').style.visibility = 'hidden';
-  document.querySelector('.filterList .filterTitle').style.visibility = 'hidden';
+  document.querySelector(".filterList .filterDate").style.visibility = "hidden";
+  document.querySelector(".filterList .filterTitle").style.visibility =
+    "hidden";
   // Changer la flèche pour montrer qu'elle est fermée
-  document.querySelector('.filterList .chevronDown').style.visibility = 'visible';
-  document.querySelector('.filterList .chevronUp').style.visibility = 'hidden';
+  document.querySelector(".filterList .chevronDown").style.visibility =
+    "visible";
+  document.querySelector(".filterList .chevronUp").style.visibility = "hidden";
 }
 // Trier les médias par popularité
 // eslint-disable-next-line no-unused-vars
 function sortMediaByLikes() {
   // Sauvegarder la valeur initiale de totalLikes
-  // eslint-disable-next-line no-undef
-  const initialLikes = totalLikes;
-  // eslint-disable-next-line no-undef
+  // const initialLikes = totalLikes;
   medias.sort((a, b) => b.likes - a.likes);
   // Effacer les médias actuels
   const mediaContainer = document.querySelector(".photographer-media");
   mediaContainer.innerHTML = "";
-  // eslint-disable-next-line no-undef
+
   displayMedia(medias);
-  document.querySelector('.filterPopular').setAttribute("aria-label", "true");
-  document.querySelector('.filterDate').setAttribute("aria-label", "false");
-  document.querySelector('.filterTitle').setAttribute("aria-label", "false");
-  // Restaurer la valeur initiale de totalLikes
-  // eslint-disable-next-line no-undef
-  totalLikes = initialLikes;
-  // Mettre à jour l'affichage du nombre total de likes
-  const footer = document.querySelector(".totalLike");
-  // eslint-disable-next-line no-undef
-  footer.innerHTML = `${totalLikes} `;
+  document.querySelector(".filterPopular").setAttribute("aria-label", "true");
+  document.querySelector(".filterDate").setAttribute("aria-label", "false");
+  document.querySelector(".filterTitle").setAttribute("aria-label", "false");
 }
 
 // Trier les médias par date
 // eslint-disable-next-line no-unused-vars
 function sortByDateDescending() {
   // Sauvegarder la valeur initiale de totalLikes
-  // eslint-disable-next-line no-undef
-  const initialLikes = totalLikes;
-  // eslint-disable-next-line no-undef
+
   medias.sort((a, b) => new Date(b.date) - new Date(a.date));
   // Effacer les médias actuels
   const mediaContainer = document.querySelector(".photographer-media");
   mediaContainer.innerHTML = "";
-  // eslint-disable-next-line no-undef
-  displayMedia(medias);
-  document.querySelector('.filterPopular').setAttribute("aria-label", "false");
-  document.querySelector('.filterDate').setAttribute("aria-label", "true");
-  document.querySelector('.filterTitle').setAttribute("aria-label", "false");
 
-  // Restaurer la valeur initiale de totalLikes
-  // eslint-disable-next-line no-undef
-  totalLikes = initialLikes;
-  // Mettre à jour l'affichage du nombre total de likes
-  const footer = document.querySelector(".totalLike");
-  // eslint-disable-next-line no-undef
-  footer.innerHTML = `${totalLikes} `;
+  displayMedia(medias);
+  document.querySelector(".filterPopular").setAttribute("aria-label", "false");
+  document.querySelector(".filterDate").setAttribute("aria-label", "true");
+  document.querySelector(".filterTitle").setAttribute("aria-label", "false");
 }
 
 // Trier les médias par titre
 // eslint-disable-next-line no-unused-vars
 function sortByTitleAscending() {
   // Sauvegarder la valeur initiale de totalLikes
-  // eslint-disable-next-line no-undef
-  const initialLikes = totalLikes;
-  // eslint-disable-next-line no-undef
   medias.sort((a, b) => a.title.localeCompare(b.title));
   // Effacer les médias actuels
   const mediaContainer = document.querySelector(".photographer-media");
   mediaContainer.innerHTML = "";
-  // eslint-disable-next-line no-undef
+
   displayMedia(medias);
 
-  document.querySelector('.filterPopular').setAttribute("aria-selected", "false");
-  document.querySelector('.filterDate').setAttribute("aria-selected", "false");
-  document.querySelector('.filterTitle').setAttribute("aria-selected", "true");
-  
-  // Restaurer la valeur initiale de totalLikes
-  // eslint-disable-next-line no-undef
-  totalLikes = initialLikes;
-  // Mettre à jour l'affichage du nombre total de likes
-  const footer = document.querySelector(".totalLike");
-  // eslint-disable-next-line no-undef
-  footer.innerHTML = `${totalLikes} `;
+  document
+    .querySelector(".filterPopular")
+    .setAttribute("aria-selected", "false");
+  document.querySelector(".filterDate").setAttribute("aria-selected", "false");
+  document.querySelector(".filterTitle").setAttribute("aria-selected", "true");
 }
